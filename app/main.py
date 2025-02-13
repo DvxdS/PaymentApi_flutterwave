@@ -22,7 +22,7 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/payments/card", response_model=schemas.PaymentResponse)
+@app.post("/payments/initiate", response_model=schemas.PaymentResponse)
 async def charge_card(
     request: Request,
     payment: schemas.PaymentCreate,
