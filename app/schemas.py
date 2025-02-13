@@ -1,4 +1,4 @@
-# app/schemas.py
+
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, Dict
 from datetime import datetime

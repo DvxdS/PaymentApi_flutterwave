@@ -1,4 +1,4 @@
-# app/test/test_payments.py
+
 
 import pytest
 from fastapi.testclient import TestClient
@@ -7,17 +7,17 @@ from datetime import datetime
 import sys
 import os
 
-# Add the parent directory to Python path
+
 current_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.insert(0, current_dir)
 
 from app.main import app, get_db
 from app.models import Payment
 
-# Test client setup
+
 client = TestClient(app)
 
-# Mock database session
+
 def override_get_db():
     try:
         db = MagicMock()
@@ -27,7 +27,7 @@ def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
-# Sample test data
+
 sample_payment_request = {
     "card_number": "5531886652142950",
     "cvv": "564",
@@ -71,16 +71,16 @@ class TestPaymentEndpoints:
     
     @patch('app.services.payments.FlutterwaveService.charge_card')
     async def test_initiate_payment_success(self, mock_charge_card):
-        # Setup
+        
         mock_charge_card.return_value = sample_flw_success_response
         mock_db = next(override_get_db())
         mock_db.commit = MagicMock()
         mock_db.refresh = MagicMock()
         
-        # Execute
+        
         response = client.post("/payments/initiate", json=sample_payment_request)
         
-        # Assert
+        
         assert response.status_code == 200
         assert response.json()["status"] == "success"
         assert response.json()["data"]["id"] == 12345
@@ -89,26 +89,26 @@ class TestPaymentEndpoints:
 
     @patch('app.services.payments.FlutterwaveService.charge_card')
     async def test_initiate_payment_failure(self, mock_charge_card):
-        # Setup
+        
         mock_charge_card.return_value = {
             "status": "error",
             "message": "Card charge failed"
         }
         
-        # Execute
+        
         response = client.post("/payments/initiate", json=sample_payment_request)
         
-        # Assert
+        
         assert response.status_code == 400
         assert response.json()["detail"] == "Card charge failed"
 
     @patch('app.services.payments.FlutterwaveService.verify_payment')
     async def test_verify_payment_success(self, mock_verify_payment):
-        # Setup
+        
         mock_verify_payment.return_value = sample_verification_response
         mock_db = next(override_get_db())
         
-        # Create mock payment record
+        
         mock_payment = MagicMock()
         mock_payment.status = "successful"
         mock_payment.amount = 100
@@ -120,10 +120,10 @@ class TestPaymentEndpoints:
         
         mock_db.query.return_value.filter.return_value.first.return_value = mock_payment
         
-        # Execute
+        
         response = client.get("/payments/verify?transaction_id=12345")
         
-        # Assert
+        
         assert response.status_code == 200
         assert response.json()["status"] == "successful"
         assert response.json()["amount"] == 100
@@ -132,29 +132,29 @@ class TestPaymentEndpoints:
 
     @patch('app.services.payments.FlutterwaveService.verify_payment')
     async def test_verify_payment_not_found(self, mock_verify_payment):
-        # Setup
+       
         mock_verify_payment.return_value = sample_verification_response
         mock_db = next(override_get_db())
         mock_db.query.return_value.filter.return_value.first.return_value = None
         
-        # Execute
+        
         response = client.get("/payments/verify?transaction_id=99999")
         
-        # Assert
+        
         assert response.status_code == 404
         assert response.json()["detail"] == "Payment not found"
 
     @patch('app.services.payments.FlutterwaveService.verify_payment')
     async def test_verify_payment_verification_failed(self, mock_verify_payment):
-        # Setup
+        
         mock_verify_payment.return_value = {
             "status": "error",
             "message": "Verification failed"
         }
         
-        # Execute
+        
         response = client.get("/payments/verify?transaction_id=12345")
         
-        # Assert
+        
         assert response.status_code == 400
         assert response.json()["detail"] == "Payment verification failed"

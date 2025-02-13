@@ -7,7 +7,7 @@ from services.payments import FlutterwaveService
 from database import SessionLocal, engine
 from typing import Optional
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
