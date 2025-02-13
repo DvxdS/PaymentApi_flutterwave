@@ -4,7 +4,7 @@ from config import settings
 from datetime import datetime
 from utils.encryption import EncryptionService
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -22,14 +22,14 @@ class FlutterwaveService:
         endpoint = f"{self.BASE_URL}/charges?type=card"
         
         try:
-            # Validate required fields
+            
             required_fields = ["card_number", "cvv", "expiry_month", "expiry_year", "amount", "currency", "email", "fullname", "authorization"]
             for field in required_fields:
                 if field not in payment_data:
                     logger.error(f"Missing required field: {field}")
                     return {"status": "error", "message": f"Missing required field: {field}"}
             
-            # Validate authorization structure
+            
             authorization_data = payment_data.get("authorization", {})
             if not isinstance(authorization_data, dict) or "pin" not in authorization_data:
                 logger.error("Missing required field: authorization.pin")
@@ -60,7 +60,7 @@ class FlutterwaveService:
                 "redirect_url": "https://your-redirect-url.com/callback"
             }
             
-            # Encrypt payload
+            
             encrypted_payload = {"client":  EncryptionService.encrypt_data(payload)}
             
             async with httpx.AsyncClient() as client:

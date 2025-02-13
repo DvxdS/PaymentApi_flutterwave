@@ -34,12 +34,11 @@ class PaymentResponse(BaseModel):
     data: Dict
     meta: Optional[Dict] = None
 
-
 class PaymentVerification(BaseModel):
     status: str
     amount: float
     currency: str
     customer_email: str
     customer_name: str
-    transaction_id: str
+    transaction_id: int 
     created_at: datetime
