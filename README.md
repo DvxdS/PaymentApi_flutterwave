@@ -108,7 +108,7 @@ curl -X GET "http://localhost:8000/payments/verify?transaction_id=288192886"
 
 ## **Déploiement**  
 
-### **1. Avec Docker (Recommandé)**  
+### **1. Avec Docker **  
 **Construire l’image :**  
 ```sh
 docker build -t fastapi-paiement .
