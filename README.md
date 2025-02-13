@@ -144,11 +144,21 @@ Redémarrer Nginx :
 sudo systemctl restart nginx
 ```
 
+
 ---
 
-## **Prochaines étapes**  
+## **Possible prochaine étapes**  
 - Ajouter une authentification pour sécuriser les endpoints.  
 - Mettre en place un système de logs et monitoring (Prometheus, Loki).  
-- Automatiser le déploiement avec CI/CD.  
+- Automatiser le déploiement avec CI/CD.
+
+
+  ## **Test with postman**  
+
+
+![flutter_wave_notifactions](https://github.com/user-attachments/assets/242dba58-f03b-4eae-96bf-c9091662fd3f)
+![transaction_screen](https://github.com/user-attachments/assets/9b559049-c970-4ce4-9780-467fbf3450ac)
+![initiate payments](https://github.com/user-attachments/assets/17f6faa3-b4b1-4e7a-b6ab-e06f13bd26fd)
+
 
 ---
