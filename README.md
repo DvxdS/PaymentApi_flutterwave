@@ -142,9 +142,7 @@ server {
 Redémarrer Nginx :  
 ```sh
 sudo systemctl restart nginx
-```![flutter_wave_notifactions](https://github.com/user-attachments/assets/a5dc5132-3a27-46d5-9bad-f28a201a7343)
-![transaction_screen](https://github.com/user-attachments/assets/de2c829f-1945-402f-aeb5-43e01900a83d)
-![initiate payments](https://github.com/user-attachments/assets/77a59c55-6323-484e-a9f3-b7e0065bf5c1)
+```
 
 
 ---
@@ -152,6 +150,12 @@ sudo systemctl restart nginx
 ## **Prochaines étapes**  
 - Ajouter une authentification pour sécuriser les endpoints.  
 - Mettre en place un système de logs et monitoring (Prometheus, Loki).  
-- Automatiser le déploiement avec CI/CD.  
+- Automatiser le déploiement avec CI/CD.
+
+
+![flutter_wave_notifactions](https://github.com/user-attachments/assets/242dba58-f03b-4eae-96bf-c9091662fd3f)
+![transaction_screen](https://github.com/user-attachments/assets/9b559049-c970-4ce4-9780-467fbf3450ac)
+![initiate payments](https://github.com/user-attachments/assets/17f6faa3-b4b1-4e7a-b6ab-e06f13bd26fd)
+
 
 ---
